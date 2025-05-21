@@ -49,7 +49,7 @@ export default function Home() {
       </div>
 
       <div id="testimonials">
-        <TestimonialsSection />
+        <TestimonialsSection onContactClick={handleOpenContact} />
       </div>
 
       <div id="contact">

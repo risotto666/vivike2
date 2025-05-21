@@ -1,50 +1,83 @@
 "use client";
 
 import Image from "next/image";
-import { Star } from "lucide-react";
-import { useState } from "react";
+import { Star, Linkedin } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ onContactClick }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredLinkedIn, setHoveredLinkedIn] = useState(null);
+  const [isCtaVisible, setIsCtaVisible] = useState(false);
+  const ctaRef = useRef(null);
 
   const testimonials = [
     {
       name: "Sarah Johnson",
       position: "Marketing Director",
       company: "TechVision Inc.",
-      image: "/placeholder.svg?height=200&width=200",
+      image: "/vivi.JPG",
       rating: 5,
       testimonial:
         "Working with this CRM consultant transformed our customer engagement strategy. Our sales team now has a unified view of customer interactions, and our conversion rates have increased by 35% in just three months.",
+      linkedin: "https://linkedin.com/in/sarah-johnson",
     },
     {
       name: "Michael Chen",
       position: "CEO",
       company: "GrowthPath Solutions",
-      image: "/placeholder.svg?height=200&width=200",
+      image: "/vivi.JPG",
       rating: 5,
       testimonial:
         "The CRM implementation was seamless and the training provided to our team was exceptional. We've seen a dramatic improvement in customer retention and our team's productivity has increased significantly.",
+      linkedin: "https://linkedin.com/in/michael-chen",
     },
     {
       name: "Jessica Williams",
       position: "Sales Manager",
       company: "Elevate Retail",
-      image: "/placeholder.svg?height=200&width=200",
+      image: "/vivi.JPG",
       rating: 4,
       testimonial:
         "The custom CRM strategy developed for our retail business helped us understand our customers better than ever before. The insights we've gained have been invaluable for our product development and marketing efforts.",
+      linkedin: "https://linkedin.com/in/jessica-williams",
     },
     {
       name: "David Rodriguez",
       position: "Operations Director",
       company: "Innovate Financial",
-      image: "/placeholder.svg?height=200&width=200",
+      image: "/vivi.JPG",
       rating: 5,
       testimonial:
         "The data analysis and insights provided have completely changed how we approach our customer relationships. We now have actionable intelligence that drives our decision-making process.",
+      linkedin: "https://linkedin.com/in/david-rodriguez",
     },
   ];
+
+  // Set up intersection observer for CTA section
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsCtaVisible(true);
+          observer.unobserve(ctaRef.current);
+        }
+      },
+      {
+        threshold: 0.2,
+        rootMargin: "0px 0px -50px 0px",
+      }
+    );
+
+    if (ctaRef.current) {
+      observer.observe(ctaRef.current);
+    }
+
+    return () => {
+      if (ctaRef.current) {
+        observer.unobserve(ctaRef.current);
+      }
+    };
+  }, []);
 
   const renderStars = (rating) => {
     return Array(5)
@@ -97,10 +130,48 @@ export default function TestimonialsSection() {
                     className="object-cover"
                   />
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold text-[#5c4d3c]">
-                    {testimonial.name}
-                  </h3>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-bold text-[#5c4d3c]">
+                      {testimonial.name}
+                    </h3>
+                    <a
+                      href={testimonial.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative"
+                      aria-label={`${testimonial.name}'s LinkedIn profile`}
+                      onMouseEnter={() => setHoveredLinkedIn(index)}
+                      onMouseLeave={() => setHoveredLinkedIn(null)}
+                    >
+                      <div
+                        className={`flex items-center justify-center w-8 h-8 rounded-md bg-gradient-to-br from-[#0077b5] to-[#0e5a8a] text-white transition-all duration-300 transform ${
+                          hoveredLinkedIn === index
+                            ? "scale-110 shadow-md rotate-[360deg]"
+                            : "scale-100 shadow-sm rotate-0"
+                        }`}
+                      >
+                        <Linkedin
+                          size={18}
+                          className={`transition-all duration-300 ${
+                            hoveredLinkedIn === index
+                              ? "scale-110"
+                              : "scale-100"
+                          }`}
+                        />
+                      </div>
+                      <span
+                        className={`absolute -top-8 left-1/2 transform -translate-x-1/2 bg-[#0077b5] text-white text-xs py-1 px-2 rounded whitespace-nowrap transition-all duration-300 ${
+                          hoveredLinkedIn === index
+                            ? "opacity-100 scale-100"
+                            : "opacity-0 scale-95"
+                        }`}
+                      >
+                        View Profile
+                        <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full border-4 border-transparent border-t-[#0077b5]"></span>
+                      </span>
+                    </a>
+                  </div>
                   <p className="text-sm text-[#7a6c5d]">
                     {testimonial.position}, {testimonial.company}
                   </p>
@@ -136,24 +207,38 @@ export default function TestimonialsSection() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <div className="inline-block bg-[#f5f2ea] px-6 py-3 rounded-lg border border-[#d6c9b6] hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1 hover:scale-[1.02] transition-transform duration-300">
-            <p className="text-lg font-medium text-[#5c4d3c]">
-              Ready to transform your customer relationships?{" "}
-              <a
-                href="#contact"
-                className="text-[#c9b18b] hover:text-[#b09a76] underline transition-colors duration-300 relative overflow-hidden group"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .getElementById("contact")
-                    .scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Let's talk about your CRM needs
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#c9b18b] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </a>
-            </p>
+        <div className="mt-16 text-center" ref={ctaRef}>
+          <div
+            className={`bg-[#f5f2ea] rounded-lg shadow-md py-24 flex flex-col items-center text-center transition-all duration-1000 ease-out overflow-hidden ${
+              isCtaVisible
+                ? "opacity-100 transform translate-y-0"
+                : "opacity-0 transform translate-y-20"
+            }`}
+            style={{
+              boxShadow: isCtaVisible
+                ? "0 10px 25px -5px rgba(201, 177, 139, 0.3)"
+                : "0 0 0 0 rgba(201, 177, 139, 0)",
+            }}
+          >
+            <h2
+              className={`text-gray-600 text-4xl md:text-5xl font-serif mb-8 transition-all duration-1000 delay-300 ease-out ${
+                isCtaVisible
+                  ? "opacity-100 transform translate-y-0"
+                  : "opacity-0 transform translate-y-10"
+              }`}
+            >
+              Let's build your next CRM together.
+            </h2>
+            <button
+              onClick={onContactClick}
+              className={`bg-[#c9b18b] hover:bg-[#b09a76] text-white font-medium py-3 px-8 rounded-lg transition-all duration-1000 delay-600 ease-out hover:shadow-lg transform hover:-translate-y-1 hover:scale-105 active:scale-95 ${
+                isCtaVisible
+                  ? "opacity-100 transform translate-y-0"
+                  : "opacity-0 transform translate-y-10"
+              }`}
+            >
+              Book a consultation
+            </button>
           </div>
         </div>
       </div>

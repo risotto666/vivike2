@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Linkedin, Facebook } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +41,43 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold text-[#5c4d3c]">Vivien Szolik</div>
+          <div className="flex items-center">
+            <div className="font-serif text-2xl font-bold tracking-wide relative group">
+              <span className="bg-gradient-to-r from-[#c9b18b] to-[#5c4d3c] bg-clip-text text-transparent transition-all duration-300 group-hover:tracking-wider">
+                Vivien
+              </span>{" "}
+              <span className="text-[#5c4d3c] transition-all duration-300 group-hover:tracking-wider">
+                Szolik
+              </span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#c9b18b] transition-all duration-500 group-hover:w-full"></span>
+            </div>
+            <div className="flex items-center ml-4 space-x-3">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#5c4d3c] hover:text-[#c9b18b] transition-colors duration-300"
+                aria-label="LinkedIn"
+              >
+                <Linkedin
+                  size={20}
+                  className="hover:scale-110 transition-transform duration-300"
+                />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#5c4d3c] hover:text-[#c9b18b] transition-colors duration-300"
+                aria-label="Facebook"
+              >
+                <Facebook
+                  size={20}
+                  className="hover:scale-110 transition-transform duration-300"
+                />
+              </a>
+            </div>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
@@ -93,6 +129,34 @@ export default function Navbar() {
                 {item.name}
               </button>
             ))}
+
+            {/* Social icons in mobile menu */}
+            <div className="flex space-x-4 pt-2">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#5c4d3c] hover:text-[#c9b18b] transition-colors duration-300"
+                aria-label="LinkedIn"
+              >
+                <Linkedin
+                  size={20}
+                  className="hover:scale-110 transition-transform duration-300"
+                />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#5c4d3c] hover:text-[#c9b18b] transition-colors duration-300"
+                aria-label="Facebook"
+              >
+                <Facebook
+                  size={20}
+                  className="hover:scale-110 transition-transform duration-300"
+                />
+              </a>
+            </div>
           </div>
         </div>
       )}

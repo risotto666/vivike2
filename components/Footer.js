@@ -9,7 +9,15 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <AnimatedSection animation="fade-right" className="mb-6 md:mb-0">
-            <h2 className="text-2xl font-bold text-[#5c4d3c]">CRM Portfolio</h2>
+            <div className="font-serif text-2xl font-bold tracking-wide relative group">
+              <span className="bg-gradient-to-r from-[#c9b18b] to-[#5c4d3c] bg-clip-text text-transparent transition-all duration-300 group-hover:tracking-wider">
+                Vivien
+              </span>{" "}
+              <span className="text-[#5c4d3c] transition-all duration-300 group-hover:tracking-wider">
+                Szolik
+              </span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#c9b18b] transition-all duration-500 group-hover:w-full"></span>
+            </div>
           </AnimatedSection>
 
           <AnimatedSection

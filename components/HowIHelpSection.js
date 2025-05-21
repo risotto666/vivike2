@@ -41,39 +41,6 @@ export default function HowIHelpSection({ onContactClick }) {
       ],
       image: "/Unknown-4.jpg",
     },
-    {
-      title: "Customer Experience Design",
-      description:
-        "I help you design exceptional customer experiences that build loyalty and drive repeat business.",
-      features: [
-        "Experience audits",
-        "Personalization strategies",
-        "Feedback implementation",
-      ],
-      image: "/Unknown-5.jpg",
-    },
-    {
-      title: "Data Analysis & Insights",
-      description:
-        "I transform your customer data into actionable insights that drive strategic decision-making.",
-      features: [
-        "Custom reporting",
-        "Trend identification",
-        "Predictive analytics",
-      ],
-      image: "/Unknown-2.jpg",
-    },
-    {
-      title: "Ongoing Optimization",
-      description:
-        "I provide continuous improvement services to ensure your CRM strategy evolves with your business.",
-      features: [
-        "Regular performance reviews",
-        "Process refinement",
-        "Technology updates",
-      ],
-      image: "/Unknown-3.jpg",
-    },
   ];
 
   useEffect(() => {
