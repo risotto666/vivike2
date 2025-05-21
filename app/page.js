@@ -8,6 +8,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function Home() {
   const [showContactForm, setShowContactForm] = useState(false);
@@ -62,6 +63,7 @@ export default function Home() {
       </div>
 
       <Footer />
+      <ScrollToTopButton />
     </main>
   );
 }
